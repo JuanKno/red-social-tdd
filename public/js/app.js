@@ -49388,7 +49388,7 @@ exports = module.exports = __webpack_require__(42)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -49868,17 +49868,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            body: ''
+            body: "",
+            statuses: []
         };
     },
 
     methods: {
         submit: function submit() {
-            axios.post('/statuses', { body: this.body });
+            var _this = this;
+
+            axios.post("/statuses", { body: this.body }).then(function (result) {
+                _this.statuses.push(result.data);
+                _this.body = '';
+            }).catch(function (err) {
+                console.log(err.response.data);
+            });
         }
     }
 });
@@ -49892,46 +49909,59 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "form",
-    {
-      on: {
-        submit: function($event) {
-          $event.preventDefault()
-          return _vm.submit($event)
-        }
-      }
-    },
+    "div",
     [
-      _c("div", { staticClass: "card-body" }, [
-        _c("textarea", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.body,
-              expression: "body"
-            }
-          ],
-          staticClass: "form-control border-0 bg-light",
-          attrs: {
-            placeholder: "¿Qué estás pensando Juan?",
-            name: "body",
-            id: "body"
-          },
-          domProps: { value: _vm.body },
+      _c(
+        "form",
+        {
           on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.body = $event.target.value
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.submit($event)
             }
           }
-        })
-      ]),
+        },
+        [
+          _c("div", { staticClass: "card-body" }, [
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.body,
+                  expression: "body"
+                }
+              ],
+              staticClass: "form-control border-0 bg-light",
+              attrs: {
+                placeholder: "¿Qué estás pensando Juan?",
+                name: "body",
+                id: "body"
+              },
+              domProps: { value: _vm.body },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.body = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _vm._m(0)
+        ]
+      ),
       _vm._v(" "),
-      _vm._m(0)
-    ]
+      _vm._l(_vm.statuses, function(status) {
+        return _c("div", {
+          key: status.id,
+          domProps: { textContent: _vm._s(status.body) }
+        })
+      })
+    ],
+    2
   )
 }
 var staticRenderFns = [
@@ -49943,7 +49973,7 @@ var staticRenderFns = [
       _c(
         "button",
         { staticClass: "btn btn-primary", attrs: { id: "create-status" } },
-        [_vm._v("Publicar")]
+        [_vm._v("\n                Publicar\n            ")]
       )
     ])
   }
