@@ -12,7 +12,7 @@ class StatusController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +20,7 @@ class StatusController extends Controller
      */
     public function index()
     {
-        //
+        return  Status::latest()->paginate();
     }
 
     /**

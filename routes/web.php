@@ -15,7 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('statuses','StatusController@store')->name('status.store');
+Route::get('statuses', 'StatusController@index')->name('statuses.index');
+Route::post('statuses', 'StatusController@store')->name('status.store');
 
 Auth::routes();
 
