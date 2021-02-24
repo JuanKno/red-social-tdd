@@ -8,6 +8,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+window.EventBus = new Vue;
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -15,6 +17,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('status-form', require('./components/StatusForm.vue'));
+Vue.component('status-list', require('./components/StatusList.vue'));
 
 const app = new Vue({
     el: '#app'
