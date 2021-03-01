@@ -36,7 +36,7 @@ export default {
       .get("/statuses")
       .then((res) => {
         this.statuses = res.data.data;
-        console.log(res);
+        // console.log(res);
       })
       .catch((err) => {
         console.log(err.response.data);

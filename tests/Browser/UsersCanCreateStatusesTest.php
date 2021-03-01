@@ -12,8 +12,6 @@ class UsersCanCreateStatuses extends DuskTestCase
     use DatabaseMigrations;
 
     /**
-     * A Dusk test example.
-     *
      * @test
      */
     public function users_can_create_statuses()

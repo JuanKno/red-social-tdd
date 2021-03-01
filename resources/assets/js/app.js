@@ -10,6 +10,8 @@ window.Vue = require('vue');
 
 window.EventBus = new Vue;
 
+import auth from './mixins/auth';
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -18,6 +20,8 @@ window.EventBus = new Vue;
 
 Vue.component('status-form', require('./components/StatusForm.vue'));
 Vue.component('status-list', require('./components/StatusList.vue'));
+
+Vue.mixin(auth);
 
 const app = new Vue({
     el: '#app'
