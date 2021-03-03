@@ -22,8 +22,8 @@
         <button
           v-if="status.is_liked"
           class="btn btn-primary"
-          dusk="like-btn"
-          @click="like(status)"
+          dusk="unlike-btn"
+          @click="unlike(status)"
         >
           TE GUSTA
         </button>
@@ -68,6 +68,16 @@ export default {
         .post(`/statuses/${status.id}/likes`)
         .then((res) => {
           status.is_liked = true;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    unlike(status) {
+      axios
+        .delete(`/statuses/${status.id}/likes`)
+        .then((res) => {
+          status.is_liked = false;
         })
         .catch((err) => {
           console.log(err);
