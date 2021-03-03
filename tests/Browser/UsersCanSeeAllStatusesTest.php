@@ -13,6 +13,7 @@ class UsersCanSeeAllStatusesTest extends DuskTestCase
 
     /**
      * @test
+     * @throws \Throwable
      */
     public function users_can_see_all_statuses_on_the_homepage()
     {
@@ -21,11 +22,11 @@ class UsersCanSeeAllStatusesTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($statuses) {
             $browser->visit('/')
-                ->waitForText($statuses->first()->body)
-                ->assertSee($statuses->first()->body)
-                ->screenshot('assert-see-body');
+                ->waitForText($statuses->first()->body);
+
             foreach ($statuses as $status) {
-                $browser->assertSee($status->user->name)
+                $browser->assertSee($status->body)
+                    ->assertSee($status->user->name)
                     ->assertSee($status->created_at->diffForHumans());
             }
         });

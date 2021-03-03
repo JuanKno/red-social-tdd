@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Status extends Model
 {
-    protected $guarded = [];    
+    protected $guarded = [];
 
 
     public function user()
@@ -27,5 +27,10 @@ class Status extends Model
         $this->likes()->firstOrCreate([
             'user_id' => auth()->id()
         ]);
+    }
+
+    public function isLiked()
+    {
+        return $this->likes()->where('user_id', auth()->id())->exists();
     }
 }

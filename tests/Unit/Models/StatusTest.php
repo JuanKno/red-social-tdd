@@ -54,7 +54,7 @@ class StatusTest extends TestCase
         $this->assertEquals(1, $status->likes->count());
     }
 
-        /**
+    /**
      *@test
      */
     public function a_status_can_be_liked_once()
@@ -71,5 +71,22 @@ class StatusTest extends TestCase
         $status->like();
 
         $this->assertEquals(1, $status->fresh()->likes->count());
+    }
+
+    /**
+     *@test
+     */
+
+    public function a_status_knows_if_it_has_been_liked()
+    {
+        $status = factory(Status::class)->create();
+        $user = factory(User::class)->create();
+        $this->assertFalse($status->isLiked());
+
+        $this->actingAs($user);
+        $this->assertFalse($status->isLiked());
+
+        $status->like();
+        $this->assertTrue($status->isLiked());
     }
 }

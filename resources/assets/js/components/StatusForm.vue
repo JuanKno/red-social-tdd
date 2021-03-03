@@ -3,12 +3,12 @@
     <form @submit.prevent="submit" v-if="isAuthenticated">
       <div class="card-body">
         <textarea
+          v-model="body"
+          name="body"
           class="form-control border-0 bg-light"
           :placeholder="`¿Qué estás pensando ${currentUser.name}?`"
-          name="body"
-          id="body"
-          v-model="body"
-        ></textarea>
+        >
+        </textarea>
       </div>
       <div class="card-footer">
         <button class="btn btn-primary" id="create-status">Publicar</button>
