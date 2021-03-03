@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="redirectIfGuest">
     <div
       class="card mb-3 border-0 shadow-sm"
       v-for="status in statuses"
@@ -67,6 +67,7 @@ export default {
   },
   methods: {
     like(status) {
+     
       axios
         .post(`/statuses/${status.id}/likes`)
         .then((res) => {
@@ -86,6 +87,7 @@ export default {
           console.log(err);
         });
     },
+   
   },
 };
 </script>
