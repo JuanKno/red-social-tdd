@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use App\Model\Status;
 use App\User;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
@@ -17,15 +18,15 @@ class UsersCanCreateStatuses extends DuskTestCase
     public function users_can_create_statuses()
     {
         $user = factory(User::class)->create();
+        $status = factory(Status::class)->create(['created_at' => now()->subMinute()]);
 
-        $this->browse(function (Browser $browser) use ($user) {
+        $this->browse(function (Browser $browser) use ($user, $status) {
             $browser->loginAs($user)
                 ->visit('/')
-                ->type('body', 'My first status')
+                ->type('body', $status->body)
                 ->press('#create-status')
-                ->screenshot('create-statuses')
-                ->waitForText('My first status')
-                ->assertSee('My first status');
+                ->waitForText($status->body)
+                ->assertSee($status->body);
         });
     }
 }

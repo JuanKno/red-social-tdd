@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Model\Status;
 use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -34,15 +35,16 @@ class CreateStatusesTest extends TestCase
         // $this->withoutExceptionHandling();
 
         $user = factory(User::class)->create();
+        $status = factory(Status::class)->create();
         $this->actingAs($user);
 
-        $response = $this->postJson(route('status.store'), ['body' => 'My first status']);
+        $response = $this->postJson(route('status.store'), ['body' => $status->body]);
 
         $response->assertJson([
-           'data' => ['body' => 'My first status']
+           'data' => ['body' => $status->body]
         ]);
 
-        $this->assertDatabaseHas('statuses', ['body' => 'My first status', 'user_id' => $user->id]);
+        $this->assertDatabaseHas('statuses', ['body' => $status->body, 'user_id' => $user->id]);
     }
 
     /**    
