@@ -9,7 +9,6 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class UsersCanSeeAllStatusesTest extends DuskTestCase
 {
-
     use DatabaseMigrations;
 
     /**
@@ -22,10 +21,11 @@ class UsersCanSeeAllStatusesTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($statuses) {
             $browser->visit('/')
-                ->waitForText($statuses->first()->body);
+                ->waitForText($statuses->first()->body)
+                ->assertSee($statuses->first()->body)
+                ->screenshot('assert-see-body');
             foreach ($statuses as $status) {
-                $browser->assertSee($statuses->first()->body)
-                    ->assertSee($status->user->name)
+                $browser->assertSee($status->user->name)
                     ->assertSee($status->created_at->diffForHumans());
             }
         });

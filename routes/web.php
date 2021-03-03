@@ -19,7 +19,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Statuses routes
 Route::get('statuses', 'StatusController@index')->name('statuses.index');
-Route::post('statuses', 'StatusController@store')->name('status.store');
+Route::post('statuses', 'StatusController@store')->name('status.store')->middleware('auth');
 
 
 // Statuses likes routes
