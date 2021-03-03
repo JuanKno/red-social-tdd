@@ -19,6 +19,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.15.2",
         "cross-env": "^7.0.3"
     }
 }

@@ -19,20 +19,23 @@
           </div>
         </div>
         <p class="card-text text-secondary" v-text="status.body"></p>
+      </div>
+      <div class="card-footer p-2">
         <button
           v-if="status.is_liked"
-          class="btn btn-primary"
-          dusk="unlike-btn"
           @click="unlike(status)"
+          class="btn btn-link btn-sm"
+          dusk="unlike-btn"
         >
-          TE GUSTA
+          <strong><i class="fa fa-thumbs-up"></i> TE GUSTA</strong>
         </button>
         <button
           v-else
-          class="btn btn-primary"
-          dusk="like-btn"
           @click="like(status)"
+          class="btn btn-link btn-sm"
+          dusk="like-btn"
         >
+          <i class="far fa-thumbs-up"></i>
           ME GUSTA
         </button>
       </div>
