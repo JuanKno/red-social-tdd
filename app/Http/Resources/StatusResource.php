@@ -21,6 +21,7 @@ class StatusResource extends JsonResource
             'user_avatar' =>'https://www.beahero.gg/wp-content/uploads/2019/07/Re-Zero-Rem.jpg',    
             'ago' => $this->created_at->diffForHumans(),   
             'is_liked' =>  $this->isLiked(), 
+            'likes_count' =>  $this->likesCount(), 
         
         ];
 
