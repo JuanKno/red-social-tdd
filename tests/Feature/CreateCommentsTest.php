@@ -37,7 +37,11 @@ class CreateCommentsTest extends TestCase
         $comment = ['body' => 'Mi primer comentario'];
 
         $this->actingAs($user);
-        $this->postJson(route('statuses.comments.store', $status), $comment);
+        $response = $this->postJson(route('statuses.comments.store', $status), $comment);
+
+        $response->assertJson([
+            'data' => ['body' => $comment['body']]
+        ]);
 
         $this->assertDatabaseHas('comments', [
             'user_id' => $user->id,
