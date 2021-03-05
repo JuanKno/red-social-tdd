@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Model\Status;
 use App\User;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CanLikeStatusesTest extends TestCase
@@ -19,13 +18,12 @@ class CanLikeStatusesTest extends TestCase
      */
     public function guest_users_can_not_like_statuses()
     {
-        // $this->withoutExceptionHandling();
 
         $status = factory(Status::class)->create();
 
-        $response = $this->post(route('statuses.likes.store', $status));
+        $response = $this->postJson(route('statuses.likes.store', $status));
 
-        $response->assertRedirect('login');
+        $response->assertStatus(401);
     }
 
     /**    
