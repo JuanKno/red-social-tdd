@@ -39,7 +39,7 @@ class StatusTest extends TestCase
         $this->assertInstanceOf(Like::class, $status->likes->first());
     }
 
-      /**
+    /**
      *@test
      */
     public function a_status_has_many_comments()

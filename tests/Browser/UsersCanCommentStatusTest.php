@@ -23,12 +23,12 @@ class UsersCanCommentStatusTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($comments, $status) {
 
-            $browser->visit('/')
-            ->waitForText($status->body)
-            ->assertSee($comments->shift()->body)
-            ->assertSee($comments->shift()->body)
-            ;
+            $browser->visit('/')->waitForText($status->body);
 
+            foreach ($comments as $comment) {
+                $browser->assertSee($comment->body)
+                    ->assertSee($comment->user->name);
+            }
         });
     }
 

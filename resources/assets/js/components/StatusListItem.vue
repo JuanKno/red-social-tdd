@@ -30,7 +30,8 @@
       </form>
 
       <div v-for="comment in comments" :key="comment.id">
-        {{ comment.body }}
+        {{ comment.body }} <br>
+        {{ comment.user_name }}
       </div>
     </div>
   </div>
