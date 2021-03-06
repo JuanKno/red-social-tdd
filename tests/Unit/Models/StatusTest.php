@@ -5,6 +5,7 @@ namespace Tests\Unit\Models;
 use App\User;
 use App\Model\Status;
 use App\Model\Like;
+use App\Model\Comment;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -36,6 +37,19 @@ class StatusTest extends TestCase
         factory(Like::class)->create(['status_id' =>  $status->id]);
 
         $this->assertInstanceOf(Like::class, $status->likes->first());
+    }
+
+      /**
+     *@test
+     */
+    public function a_status_has_many_comments()
+    {
+
+        $status = factory(Status::class)->create();
+
+        factory(Comment::class)->create(['status_id' =>  $status->id]);
+
+        $this->assertInstanceOf(Comment::class, $status->comments->first());
     }
 
 
