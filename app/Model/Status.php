@@ -3,11 +3,13 @@
 namespace App\Model;
 
 use App\User;
-use App\Model\Like;
+use App\Traits\HasLikes;
 use Illuminate\Database\Eloquent\Model;
 
 class Status extends Model
 {
+    use HasLikes;
+    
     protected $guarded = [];
 
 
@@ -17,38 +19,8 @@ class Status extends Model
     }
 
 
-    public function likes()
-    {
-        return $this->morphMany(Like::class, 'likeable');
-    }
-
     public function comments()
     {
         return $this->hasMany(Comment::class);
-    }
-
-
-    public function like()
-    {
-        $this->likes()->firstOrCreate([
-            'user_id' => auth()->id()
-        ]);
-    }
-
-    public function unLike()
-    {
-        $this->likes()->where([
-            'user_id' => auth()->id()
-        ])->delete();
-    }
-
-    public function isLiked()
-    {
-        return $this->likes()->where('user_id', auth()->id())->exists();
-    }
-
-    public function likesCount()
-    {
-        return $this->likes()->count();
     }
 }
