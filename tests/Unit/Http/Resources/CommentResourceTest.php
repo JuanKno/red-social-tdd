@@ -23,6 +23,11 @@ class CommentResourceTest extends TestCase
         $commentResource = CommentResource::make($comment)->resolve();
 
         $this->assertEquals(
+            $comment->id,
+            $commentResource['id']
+        );
+
+        $this->assertEquals(
             $comment->body,
             $commentResource['body']
         );
@@ -35,6 +40,15 @@ class CommentResourceTest extends TestCase
         $this->assertEquals(
             'https://www.beahero.gg/wp-content/uploads/2019/07/Re-Zero-Rem.jpg',
             $commentResource['user_avatar']
+        );
+
+        $this->assertEquals(
+            0,
+            $commentResource['likes_count']
+        );
+        $this->assertEquals(
+            false,
+            $commentResource['is_liked']
         );
     }
 }
