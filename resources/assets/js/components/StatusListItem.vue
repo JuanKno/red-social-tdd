@@ -5,11 +5,14 @@
         <img
           class="rounded mr-3"
           width="40px"
-          src="https://www.beahero.gg/wp-content/uploads/2019/07/Re-Zero-Rem.jpg"
-          alt=""
+          height="40px"
+          :src="status.user_avatar"
+          :alt="status.user_name"
         />
         <div>
-          <h5 class="mb-1" v-text="status.user_name"></h5>
+          <h5 class="mb-1">
+            <a :href="status.user_link" v-text="status.user_name"></a>
+          </h5>
           <div class="small text-muted" v-text="status.ago"></div>
         </div>
       </div>
@@ -43,8 +46,11 @@
           <div class="flex-grow-1">
             <div class="card border-0 shadow-sm">
               <div class="card-body p-2 text-secondary">
-                <a href="#">
-                  <strong> {{ comment.user_name }}</strong>
+                <a
+                  :href="comment.user_link"
+                  class="font-weight-bold"
+                  v-text="comment.user_name"
+                >
                 </a>
                 {{ comment.body }}
               </div>
@@ -73,6 +79,7 @@
         <div class="d-flex align-items-center">
           <img
             width="34px"
+            height="34px"
             src="https://www.beahero.gg/wp-content/uploads/2019/07/Re-Zero-Rem.jpg"
             class="rounded shadow-sm mr-2"
             :alt="currentUser.name"

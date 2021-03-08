@@ -38,7 +38,12 @@ class CommentResourceTest extends TestCase
         );
 
         $this->assertEquals(
-            'https://www.beahero.gg/wp-content/uploads/2019/07/Re-Zero-Rem.jpg',
+            $comment->user->link(),
+            $commentResource['user_link']
+        );
+
+        $this->assertEquals(
+            $comment->user->avatar(),
             $commentResource['user_avatar']
         );
 
