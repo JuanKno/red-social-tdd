@@ -18,7 +18,12 @@
     <div
       class="card-footer p-2 d-flex justify-content-between align-items-center"
     >
-      <like-button :status="status"> </like-button>
+      <like-button
+        :model="status"
+        :url="`/statuses/${this.status.id}/likes`"
+        dusk="like-btn"
+      >
+      </like-button>
 
       <div class="text-secondary mr-2">
         <i class="far fa-thumbs-up"></i>
@@ -42,16 +47,14 @@
           </div>
         </div>
         <span dusk="comment-likes-count">{{ comment.likes_count }}</span>
-        <button
-          v-if="comment.is_liked"
-          @click="unlikeComment(comment)"
-          dusk="comment-unlike-btn"
+
+        <like-button
+          dusk="comment-like-btn"
+          :url="`/comments/${comment.id}/likes`"
+          :model="comment"
         >
-          TE GUSTA
-        </button>
-        <button v-else @click="likeComment(comment)" dusk="comment-like-btn">
-          ME GUSTA
-        </button>
+        </like-button>       
+       
       </div>
       <form @submit.prevent="addComment" v-if="isAuthenticated">
         <div class="d-flex align-items-center">
@@ -110,28 +113,7 @@ export default {
           console.log(err.response.data);
         });
     },
-    likeComment(comment) {
-      axios
-        .post(`/comments/${comment.id}/likes`)
-        .then((res) => {
-          comment.likes_count++;
-          comment.is_liked = true;
-        })
-        .catch((err) => {
-          console.log(err.response.data);
-        });
-    },
-    unlikeComment(comment) {
-      axios
-        .delete(`/comments/${comment.id}/likes`)
-        .then((res) => {
-          comment.likes_count--;
-          comment.is_liked = false;
-        })
-        .catch((err) => {
-          console.log(err.response.data);
-        });
-    },
+  
   },
 };
 </script>
